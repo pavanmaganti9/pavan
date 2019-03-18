@@ -1,0 +1,13 @@
+<html>
+{% load crispy_forms_tags %}
+	{% if messages %}
+		{% for message in messages %}
+			{{message}}
+		{% endfor %}
+	{% endif %}
+	<form method="POST">
+		{% csrf_token %}
+		{{ form|crispy }}
+		<button>Sign Up</button>
+	</form>
+</html>
