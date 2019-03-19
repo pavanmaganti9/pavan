@@ -1,4 +1,8 @@
-<html>
+{% extends 'header.html' %}
+
+{% block content %}
+<br>
+ <div class="container">
 {% load crispy_forms_tags %}
 	{% if messages %}
 		{% for message in messages %}
@@ -10,4 +14,5 @@
 		{{ form|crispy }}
 		<button>Sign Up</button>
 	</form>
-</html>
+
+{% endblock %}

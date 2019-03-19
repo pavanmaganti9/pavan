@@ -1,0 +1,15 @@
+{% extends 'header.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<br>
+ <div class="container">
+<h2>Create new post</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit">Submit</button>
+  </form>
+<br><div><br>
+<a href="{% url 'data' %}">View All posts</a>
+</div>
+{% endblock %}

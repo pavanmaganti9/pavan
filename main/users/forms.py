@@ -8,3 +8,11 @@ class UserRegistrationForm(UserCreationForm):
 	class Meta:
 		model = User
 		fields = ['username','email','password1','password2']
+		
+from .models import blog_posts
+
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model = blog_posts
+        fields = ('title', 'tag', 'author')
