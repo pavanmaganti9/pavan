@@ -5,8 +5,10 @@ from django.contrib import messages
 from .forms import UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .forms import PostForm
-from .models import blog_posts
+from .forms import PostForm, UploadFileForm
+from .models import blog_posts, Document
+from django.core.files.storage import FileSystemStorage
+
 
 def index(request):
 	return render(request, 'index.html', {'title' : 'Home'})
@@ -87,3 +89,15 @@ def delete(request,pk):
 	
 def passwordreset(request):
 	return render(request, 'password_reset.html', {'title' : 'Dynamic Content'})
+	
+def file_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'upload.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'upload.html', {'title' : 'File Upload'})
+	

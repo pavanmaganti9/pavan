@@ -16,6 +16,7 @@ urlpatterns = [
 	url(r'^profile/$', views.profile, name='profile'),
 	url(r'^new/$', views.post_create, name='post_create'),
 	url(r'^data/$', views.data, name='data'),
+	url(r'^file_upload/', views.file_upload, name='file_upload'),
 	url(r'^details/(?P<id>\d+)/$', views.details, name='details'),
 	url(r'^update/(?P<pk>\d+)$', views.update, name='update'),
 	url(r'^edit/(?P<pk>\d+)/$', views.edit, name='edit'),
