@@ -27,6 +27,7 @@ urlpatterns = [
         auth_views.password_reset_confirm, name='password_reset_confirm'),
     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
 	url(r'^excel/', views.excel, name='excel'),
+	url(r'^oauth/', include('social_django.urls', namespace='social')),
 ]
 
 if settings.DEBUG:
