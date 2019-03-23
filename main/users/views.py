@@ -8,7 +8,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import PostForm, UploadFileForm
 from .models import blog_posts, Document
 from django.core.files.storage import FileSystemStorage
-
+import openpyxl
+#-*- coding:utf-8 -*-
 
 def index(request):
 	return render(request, 'index.html', {'title' : 'Home'})
@@ -44,9 +45,10 @@ def post_create(request):
     return render(request, 'post_form.html', {'form': form})
 	
 def data(request):
-	Website = blog_posts.objects.all()
+	Website = blog_posts.objects.all().order_by('-id')
+	Count = blog_posts.objects.all().count()
 	page = request.GET.get('page', 1)
-	paginator = Paginator(Website, 3)
+	paginator = Paginator(Website, 5)
 	try:
 		users = paginator.page(page)
 	except PageNotAnInteger:
@@ -58,7 +60,7 @@ def data(request):
 		# 'website' : Website,
 		# 'users': users
 	# }
-	return render(request, 'data.html', { 'users': users,'title' : 'Dynamic Content' })
+	return render(request, 'data.html', { 'users': users,'count':Count,'title' : 'Dynamic Content' })
 	
 def details(request, id):
 	Content = blog_posts.objects.get(id=id)
@@ -100,4 +102,24 @@ def file_upload(request):
             'uploaded_file_url': uploaded_file_url
         })
     return render(request, 'upload.html', {'title' : 'File Upload'})
+	
+def excel(request):
+	if "GET" == request.method:
+		return render(request, 'excel.html', {})
+	else:
+		excel_file = request.FILES["excel_file"]
+		wb = openpyxl.load_workbook(excel_file)
+		# getting a particular sheet by name out of many sheets
+		worksheet = wb["February"]
+		#print(worksheet)
+
+        excel_data = list()
+        # iterating over the rows and
+        # getting value from each cell in row
+        for row in worksheet.iter_rows():
+            row_data = list()
+            for cell in row:
+                row_data.append(str(cell.value))
+            excel_data.append(row_data)
+	return render(request, 'excel.html',{"excel_data":excel_data, 'title':'Excel Read'})
 	

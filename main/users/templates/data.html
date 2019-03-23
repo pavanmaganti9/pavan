@@ -4,15 +4,31 @@
 <br>
  <div class="container">
 <h2>Data from MYSQL</h2>
+<table border="1" width='700'>
+<tr align="center">
+<td><b>Title</b></td>
+<td><b>Tag</b></td>
+<td><b>Author</b></td>
+<td><b>Status</b></td>
+<td><b>Delete</b></td>
+</tr>
   <ul class="collection">
+  {% comment %}
+  {{ count }}
+  {% endcomment %}
 {% for websites in users %}
-<li class="collection-item">
-	<a href="/details/{{websites.id}}">{{websites.title}}</a> 
-	<a href="/update/{{websites.id}}"><b>Edit</b></a>
-	<a href="/delete/{{websites.id}}"><b>Delete</b></a>
-</li>
+
+<tr class="collection-item" align="center">
+	<td><a href="/details/{{websites.id}}">{{websites.title}}</a></td>
+	<td>{{websites.tag}}</td>
+	<td>{{websites.author}}</td>
+	<td><a href="/update/{{websites.id}}"><b>Edit</b></a></td>
+	<td><a href="/delete/{{websites.id}}"><b>Delete</b></a></td>
+</tr>
 {% endfor %}
-</ul>  
+</ul> 
+
+</table> 
 {{ user.username }}
 {% if users.has_other_pages %}
   <ul class="pagination">
