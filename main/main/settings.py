@@ -40,7 +40,15 @@ INSTALLED_APPS = (
 	'users',
 	'crispy_forms',
 	'social_django',
+	'search',
+	'django_elasticsearch_dsl',
 )
+
+ELASTICSEARCH_DSL = {
+	'default': {
+		'hosts': 'localhost:9200'
+	},
+}
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

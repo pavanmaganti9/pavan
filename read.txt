@@ -1,0 +1,10 @@
+ElasticSearch 5.6.3
+
+pip install django_elasticsearch_dsl
+
+create documents.py
+
+python manage.py search_index --rebuild
+
+Y
+

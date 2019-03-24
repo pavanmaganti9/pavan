@@ -1,0 +1,16 @@
+<html>
+<title>{{ title }}</title>
+<body>
+<form method="get">
+	<input id="q" name="q" type="text" placeholder="Your search">
+</form>
+
+{% for item in posts %}
+	{{item.id}}
+	{{item.title}}
+{% endfor %}
+
+<br><br>
+<a href="{% url 'index' %}">home</a>
+</body>
+</html>
