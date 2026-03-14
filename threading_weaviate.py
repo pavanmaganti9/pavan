@@ -41,3 +41,12 @@ for item in results:
     )
 
 print("All documents inserted successfully.")
+
+#======================================
+#adding in Batch
+with collection.batch.dynamic() as batch:
+    for item in results:
+        batch.add_object(
+            properties={"text": item["text"]},
+            vector=item["vector"]
+        )
