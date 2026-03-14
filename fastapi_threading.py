@@ -75,3 +75,38 @@ def search():
         "vector_results": vector_result,
         "external_data": api_result
     }
+#=========================
+#get multiple api's data
+from fastapi import FastAPI
+from concurrent.futures import ThreadPoolExecutor
+import requests
+
+app = FastAPI()
+
+# Create a global thread pool
+executor = ThreadPoolExecutor(max_workers=5)
+
+# Function to call external API
+def fetch_api(url):
+    response = requests.get(url)
+    return response.json()
+
+
+@app.get("/external-data")
+def get_external_data():
+
+    urls = [
+        "https://jsonplaceholder.typicode.com/users/1",
+        "https://jsonplaceholder.typicode.com/posts/1",
+        "https://jsonplaceholder.typicode.com/todos/1"
+    ]
+
+    futures = [executor.submit(fetch_api, url) for url in urls]
+
+    results = [future.result() for future in futures]
+
+    return {
+        "user": results[0],
+        "post": results[1],
+        "todo": results[2]
+    }
