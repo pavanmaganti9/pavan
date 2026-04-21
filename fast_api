@@ -1,0 +1,89 @@
+Fast API
+𝗤𝟭: 𝗪𝗵𝗮𝘁 𝗶𝘀 𝗙𝗮𝘀𝘁𝗔𝗣𝗜 𝗯𝘂𝗶𝗹𝘁 𝗼𝗻?
+FastAPI is built on two key components:
+→ Starlette: Handles web requests and async event loops
+→ Pydantic: Validates and parses your data
+
+This combination gives you:
+• Super fast I/O operations
+• Strict type checking automatically
+• Built-in data validation
+
+The interviewer wants to know you understand it's not just a framework.
+It's a well-designed combination of proven tools.
+
+𝗤𝟮: 𝗪𝗵𝗮𝘁'𝘀 𝘁𝗵𝗲 𝗱𝗶𝗳𝗳𝗲𝗿𝗲𝗻𝗰𝗲 𝗯𝗲𝘁𝘄𝗲𝗲𝗻 𝗮𝘀𝘆𝗻𝗰 𝗱𝗲𝗳 𝘃𝘀 𝗱𝗲𝗳?
+Async is the core principle for performance in FastAPI.
+
+Use async def when your endpoint does:
+• Database calls
+• External API requests
+• File read/write operations
+• Any I/O-bound task
+
+Regular def blocks the entire app while waiting.
+Async def lets the server handle other requests while waiting.
+That's where you get real performance gains.
+
+𝗤𝟯: 𝗛𝗼𝘄 𝗱𝗼 𝘆𝗼𝘂 𝗵𝗮𝗻𝗱𝗹𝗲 𝗗𝗕 𝗰𝗼𝗻𝗻𝗲𝗰𝘁𝗶𝗼𝗻𝘀?
+Dependency injection is the secret sauce in FastAPI.
+
+With Depends, every request automatically gets:
+• A fresh database session
+• Proper connection management
+• Clean separation of concerns
+
+You can use the same pattern for:
+• Authentication checks
+• Configuration loading
+• Cache client injection
+
+The benefit: Your endpoints stay clean, testable, and decoupled.
+Show you understand the pattern, not just the syntax.
+
+𝗤𝟰: 𝗛𝗼𝘄 𝗱𝗼𝗲𝘀 𝗙𝗮𝘀𝘁𝗔𝗣𝗜 𝘃𝗮𝗹𝗶𝗱𝗮𝘁𝗲 𝗶𝗻𝗽𝘂𝘁𝘀?
+Pydantic handles validation automatically.
+
+You define a BaseModel with your expected fields.
+FastAPI then:
+• Auto-validates incoming requests
+• Auto-serializes responses
+• Returns clear error messages if validation fails
+
+This means:
+→ No more manual checks like "if 'name' not in payload"
+→ Safer APIs with guaranteed data types
+→ Cleaner, more maintainable code
+
+The interviewer wants to see you understand automatic validation is a production advantage.
+
+𝗤𝟱: 𝗪𝗵𝗮𝘁 𝗮𝗯𝗼𝘂𝘁 𝗔𝗣𝗜 𝗱𝗼𝗰𝘂𝗺𝗲𝗻𝘁𝗮𝘁𝗶𝗼𝗻?
+FastAPI auto-generates interactive docs at /docs.
+
+It uses your Python type hints to create:
+• Swagger UI automatically
+• Always in-sync documentation
+• Interactive testing interface
+
+Why this matters:
+→ Frontend teams can test endpoints without asking you
+→ New developers understand APIs immediately
+→ Your documentation never goes stale
+
+Mention: "This saves hours of manual documentation work and keeps contracts in sync."
+
+𝗤𝟲: 𝗛𝗼𝘄 𝗱𝗼 𝘆𝗼𝘂 𝗵𝗮𝗻𝗱𝗹𝗲 𝘀𝗹𝗼𝘄 𝗼𝗽𝗲𝗿𝗮𝘁𝗶𝗼𝗻𝘀?
+Background tasks keep your API responsive.
+
+Use BackgroundTasks to offload:
+• Email sending
+• Log processing
+• Model retraining triggers
+• Heavy computations
+
+The flow:
+1. Return response to user immediately
+2. Process slow tasks in background
+3. User doesn't wait
+
+This keeps your app snappy and user experience smooth.
